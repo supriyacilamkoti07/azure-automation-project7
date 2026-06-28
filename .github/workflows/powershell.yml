@@ -1,0 +1,24 @@
+name: PowerShell Validation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install PowerShell
+        uses: actions/setup-powershell@v2
+
+      - name: Verify PowerShell Version
+        run: pwsh --version
+
+      - name: Validate Script
+        run: |
+          pwsh -Command "Get-ChildItem *.ps1"
